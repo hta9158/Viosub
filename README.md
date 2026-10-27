@@ -10,3 +10,6 @@
 
 ```bash
 bash <(curl -sSL [https://raw.githubusercontent.com/hta9158/Viosub/main/install.sh](https://raw.githubusercontent.com/hta9158/Viosub/main/install.sh))
+
+# بعد از نصب 
+Pasarguard Restart
