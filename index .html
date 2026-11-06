@@ -7,9 +7,13 @@
 <meta name="theme-color" content="#070809" id="meta-theme">
 <meta name="format-detection" content="telephone=no">
 <title>پنل اشتراک</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Vazirmatn:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+@font-face {
+  font-family: Vazirmatn;
+  src: url("https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/fonts/webfonts/Vazirmatn%5Bwght%5D.woff2") format("woff2-variations");
+  font-weight: 100 900; font-style: normal; font-display: swap;
+}
+</style>
 
 <!-- ============================================================
      تنظیمات برند (برای هر مشتری فقط همین بخش را عوض کنید)
@@ -29,8 +33,8 @@ window.PANEL_CONFIG = { panelUrl: "https://panel.example.com", subscriptionUrl: 
 
 <style>
 :root {
-  --font: "Vazirmatn", "Space Grotesk", Tahoma, system-ui, sans-serif;
-  --font-mono: "Space Grotesk", "Vazirmatn", monospace;
+  --font: "Vazirmatn", Tahoma, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SF Mono", Menlo, Consolas, "Vazirmatn", monospace;
   --ok: #10B981;
   --warn: #F59E0B;
   --bad: #EF4444;
@@ -142,7 +146,7 @@ img, svg, canvas { max-width: 100%; }
   box-shadow: 0 0 14px var(--accent);
 }
 .brand h1 {
-  font-family: var(--font-mono);
+  font-family: var(--font);
   font-size: 20px; font-weight: 800; letter-spacing: -.02em;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
@@ -675,6 +679,56 @@ html[data-theme="light"] .ping-chip.fast {
   .panel, .hero-card { padding: 18px; border-radius: 22px; }
   .nav button { padding: 0 14px; font-size: 12.5px; }
 }
+
+/* ---------- Flags / tags / best / top list ---------- */
+.cfg-head { display: flex; align-items: center; gap: 12px; min-width: 0; flex: 1; }
+.cfg-flag {
+  width: 46px; height: 46px; border-radius: 14px; flex: none; display: grid; place-items: center;
+  background: var(--cell); border: 1px solid var(--line); font-size: 24px; line-height: 1; overflow: hidden;
+}
+.cfg-flag .flag-emoji { font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif; font-size: 26px; line-height: 1; }
+.cfg-flag img { width: 30px; height: 22px; object-fit: cover; border-radius: 4px; box-shadow: 0 1px 4px rgba(0,0,0,.35); }
+.cfg-flag svg { width: 21px; height: 21px; color: var(--accent); }
+.cfg.main .cfg-flag { background: var(--accent); border-color: var(--accent); }
+.cfg.main .cfg-flag svg { color: var(--on-accent); }
+.cfg-tx b { white-space: normal; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.5; unicode-bidi: plaintext; text-align: start; }
+.cfg-tx .host-txt { display: block; margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ctag {
+  font-family: var(--font-mono); font-size: 10.5px; font-weight: 700; padding: 1px 7px; border-radius: 6px;
+  background: var(--card); border: 1px solid var(--line); color: var(--mute); direction: ltr; letter-spacing: .02em;
+}
+.ctag.sec { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 35%, transparent); }
+.cfg.best { border-color: color-mix(in srgb, var(--accent) 55%, transparent); box-shadow: 0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent) inset, 0 8px 24px var(--accent-glow); }
+.best-tag { font-size: 11px; font-weight: 800; color: var(--accent); }
+.cfg-head ~ .cfg-act { align-self: center; }
+.top-panel { margin-top: 24px; }
+#top-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 8px; }
+.top-row {
+  display: grid; grid-template-columns: 28px 38px minmax(0, 1fr) auto auto; align-items: center; gap: 10px;
+  padding: 9px 12px; border-radius: 16px; border: 1px solid var(--edge); background: var(--card-2);
+  cursor: pointer; transition: border-color .2s, transform .2s var(--ease);
+}
+.top-row:hover { border-color: color-mix(in srgb, var(--accent) 45%, transparent); transform: translateY(-1px); }
+.rk { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; font-size: 12px; font-weight: 800; background: var(--cell); color: var(--mute); }
+.top-row:nth-child(1) .rk { background: var(--accent); color: var(--on-accent); box-shadow: 0 0 12px var(--accent-glow); }
+.top-row .cfg-flag { width: 38px; height: 38px; border-radius: 12px; }
+.top-row .cfg-flag .flag-emoji { font-size: 21px; }
+.top-row .cfg-flag img { width: 24px; height: 17px; }
+.top-row .cfg-tx b { font-size: 13px; -webkit-line-clamp: 1; }
+.top-row .host-txt { font-size: 10.5px; }
+.top-row .round.sm { width: 34px; height: 34px; border-radius: 11px; box-shadow: none; }
+.top-row .round.sm svg { width: 15px; height: 15px; }
+.top-foot { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 14px; font-size: 12px; color: var(--mute); }
+.link-btn { color: var(--accent); font-weight: 700; font-size: 12.5px; }
+#top-list .empty { grid-column: 1 / -1; }
+.head-actions .seg button { height: 30px; }
+.round.spin svg, .pill-btn.spin svg { animation: spin .8s linear infinite; }
+@media (max-width: 480px) {
+  #top-list { grid-template-columns: 1fr; }
+  .top-row { grid-template-columns: 24px 36px minmax(0, 1fr) auto; }
+  .top-row .round.sm { display: none; }
+  .cfg-head ~ .cfg-act { align-self: flex-end; }
+}
 </style>
 </head>
 <body>
@@ -767,6 +821,20 @@ html[data-theme="light"] .ping-chip.fast {
           <div class="scale" id="scale"><span>کم</span><i></i><i class="l1"></i><i class="l2"></i><i class="l3"></i><i class="l4"></i><span>زیاد</span></div>
         </section>
       </div>
+
+      <section class="panel top-panel hidden" id="top-panel">
+        <div class="head">
+          <div>
+            <h3>۱۰ اتصال برتر</h3>
+            <p>کمترین پینگ از دستگاه شما (علامت ~ یعنی تخمینی)</p>
+          </div>
+          <div class="head-actions">
+            <button class="round" id="top-refresh" type="button" aria-label="تست پینگ"></button>
+          </div>
+        </div>
+        <div id="top-list"></div>
+        <div class="top-foot"><span id="top-foot-text"></span><button class="link-btn" id="top-more" type="button">همه سرورها ←</button></div>
+      </section>
     </section>
 
     <!-- اتصال -->
@@ -778,6 +846,10 @@ html[data-theme="light"] .ping-chip.fast {
             <p>بررسی پینگ لحظه‌ای و دریافت کانفیگ‌های اتصال</p>
           </div>
           <div class="head-actions">
+            <div class="seg" id="cfg-sort" role="group" aria-label="مرتب‌سازی">
+              <button type="button" data-sort="ping" class="on">سریع‌ترین</button>
+              <button type="button" data-sort="default">پیش‌فرض</button>
+            </div>
             <button class="pill-btn" id="ping-all" type="button"></button>
             <button class="pill-btn primary" id="copy-all" type="button"></button>
           </div>
@@ -1426,7 +1498,11 @@ html[data-theme="light"] .ping-chip.fast {
 
   function renderHeat(slots, max) {
     var range = state.range, html = "";
-    if (range !== "1d") {
+    var WKL = ["ی", "د", "س", "چ", "پ", "ج", "ش"];
+    if (range === "7d") {
+      $("wk").innerHTML = slots.map(function (s) { return "<span>" + WKL[s.date.getDay()] + "</span>"; }).join("");
+    } else if (range === "30d") {
+      $("wk").innerHTML = [6, 0, 1, 2, 3, 4, 5].map(function (k) { return "<span>" + WKL[k] + "</span>"; }).join("");
       var lead = (slots[0].date.getDay() + 1) % 7;
       for (var g = 0; g < lead; g++) html += '<span class="cell gap"></span>';
     }
@@ -1570,6 +1646,11 @@ html[data-theme="light"] .ping-chip.fast {
         var m = raw.match(/Endpoint\s*=\s*([^\s:]+):(\d+)/i);
         if (m) return { host: m[1], port: Number(m[2]) || 51820 };
       }
+      if (/^ss:\/\//i.test(raw) && raw.split("#")[0].indexOf("@") < 0) {
+        var sd = b64(raw.slice(5).split("#")[0]);
+        var sm = sd && sd.match(/@([^:\/]+):(\d+)/);
+        if (sm) return { host: sm[1], port: Number(sm[2]) || 443 };
+      }
       var normalized = raw.replace(/^(vless|trojan|ss|shadowsocks|hysteria2?|hy2|tuic|wireguard):\/\//i, "http://");
       var u = new URL(normalized);
       if (u.hostname) {
@@ -1581,93 +1662,160 @@ html[data-theme="light"] .ping-chip.fast {
     return null;
   }
 
-  /* تست پینگ از مرورگر با سنجش زمان هندشیک TCP/TLS */
-  function measureEndpointPing(ep) {
-    if (!ep || !ep.host) return Promise.resolve(null);
-    var proto = (ep.port === 80 || ep.port === 8080 || ep.port === 2052 || ep.port === 2082) ? "http://" : "https://";
-    var hostStr = ep.host.indexOf(":") >= 0 ? "[" + ep.host + "]" : ep.host;
-    var target = proto + hostStr + (ep.port ? ":" + ep.port : "") + "/?_p=" + Date.now() + Math.random().toString(36).slice(2, 6);
+/* ---------- Country flags ---------- */
+  var COUNTRIES = [
+    ["DE", "germany|deutsch|آلمان|frankfurt|فرانکفورت|berlin"], ["NL", "netherlands|holland|هلند|amsterdam|آمستردام"],
+    ["US", "united states|usa|آمریکا|امریکا|america|new york|los angeles|dallas|miami|seattle"], ["GB", "united kingdom|uk|britain|انگلیس|بریتانیا|london|لندن"],
+    ["FR", "france|فرانسه|paris|پاریس"], ["TR", "turkey|türkiye|ترکیه|istanbul|استانبول"], ["AE", "emirates|uae|امارات|dubai|دبی"],
+    ["FI", "finland|فنلاند|helsinki"], ["SE", "sweden|سوئد|stockholm"], ["CA", "canada|کانادا|toronto"], ["JP", "japan|ژاپن|tokyo|توکیو"],
+    ["SG", "singapore|سنگاپور"], ["HK", "hong kong|هنگ کنگ|هنگ‌کنگ"], ["IR", "iran|ایران|tehran|تهران"], ["RU", "russia|روسیه|moscow|مسکو"],
+    ["PL", "poland|لهستان|warsaw"], ["CH", "switzerland|سوئیس|zurich"], ["IT", "italy|ایتالیا|milan|میلان"], ["ES", "spain|اسپانیا|madrid"],
+    ["AM", "armenia|ارمنستان|yerevan"], ["KZ", "kazakhstan|قزاقستان"], ["IN", "india|هند|mumbai"], ["AU", "australia|استرالیا|sydney"],
+    ["RO", "romania|رومانی"], ["UA", "ukraine|اوکراین"], ["IE", "ireland|ایرلند"], ["NO", "norway|نروژ"], ["AT", "austria|اتریش|vienna"],
+    ["LT", "lithuania|لیتوانی"], ["LV", "latvia|لتونی"], ["EE", "estonia|استونی"], ["BG", "bulgaria|بلغارستان"], ["CZ", "czech|چک"],
+    ["KR", "korea|کره"], ["TW", "taiwan|تایوان"], ["BR", "brazil|برزیل"], ["IL", "israel|اسرائیل"], ["IQ", "iraq|عراق"], ["GE", "georgia|گرجستان"]
+  ];
+  var FLAG_RE = /[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/g;
+  function flagFromName(name) {
+    name = String(name || "");
+    var m = name.match(/[\uD83C][\uDDE6-\uDDFF][\uD83C][\uDDE6-\uDDFF]/);
+    if (m) return String.fromCharCode(m[0].codePointAt(0) - 0x1F1E6 + 65, m[0].codePointAt(2) - 0x1F1E6 + 65);
+    var low = name.toLowerCase();
+    for (var i = 0; i < COUNTRIES.length; i++) {
+      var words = COUNTRIES[i][1].split("|");
+      for (var j = 0; j < words.length; j++) if (low.indexOf(words[j]) > -1) return COUNTRIES[i][0];
+    }
+    var cc = low.match(/(?:^|[^a-z])([a-z]{2})(?:[^a-z]|$)/);
+    if (cc) { var up = cc[1].toUpperCase(); for (var k = 0; k < COUNTRIES.length; k++) if (COUNTRIES[k][0] === up) return up; }
+    return "";
+  }
+  function cleanName(name) { return String(name || "").replace(FLAG_RE, "").replace(/^[\s|\-–_]+|[\s|\-–_]+$/g, "").trim(); }
+  function emojiFlag(cc) { return String.fromCodePoint(0x1F1E6 + cc.charCodeAt(0) - 65, 0x1F1E6 + cc.charCodeAt(1) - 65); }
+  var NEEDS_FLAG_IMG = /Windows NT/i.test(navigator.userAgent || "");
+  function flagHtml(cc) {
+    if (!cc) return ICON.plug;
+    if (!NEEDS_FLAG_IMG) return '<span class="flag-emoji" role="img" aria-label="' + esc(cc) + '">' + emojiFlag(cc) + "</span>";
+    return '<img alt="' + esc(cc) + '" src="https://flagcdn.com/w40/' + cc.toLowerCase() + '.png" onerror="this.outerHTML=\'<span class=&quot;flag-emoji&quot;>' + emojiFlag(cc) + '</span>\'">';
+  }
 
-    function singleProbe() {
-      return new Promise(function (resolve) {
-        var t0 = performance.now(), done = false;
-        var ctrl = window.AbortController ? new AbortController() : null;
-        var timer = setTimeout(function () {
-          if (done) return;
-          done = true;
-          if (ctrl) try { ctrl.abort(); } catch (e) {}
-          resolve(null);
-        }, 3200);
+  /* ---------- Config details ---------- */
+  function parseConfig(raw) {
+    raw = String(raw || "");
+    var info = { host: "", port: 0, proto: linkType(raw), net: "", sec: "" }, ep = parseEndpoint(raw), low = raw.toLowerCase();
+    if (ep) { info.host = ep.host; info.port = ep.port; }
+    try {
+      if (low.indexOf("vmess://") === 0) {
+        var d = JSON.parse(b64(raw.slice(8))); info.net = d.net || "tcp"; info.sec = d.tls || "";
+      } else if (/^(vless|trojan|ss|hysteria2?|hy2|tuic):\/\//.test(low)) {
+        var u = new URL(raw.replace(/^ss:\/\/[^@#?]+(?=[#?]|$)/i, "ss://x@x:1"));
+        info.net = u.searchParams.get("type") || ""; info.sec = u.searchParams.get("security") || "";
+        if (!info.net && /^(hysteria|hy2|tuic)/.test(low)) info.net = "udp";
+        if (low.indexOf("trojan://") === 0 && !info.sec) info.sec = "tls";
+      }
+    } catch (e) {}
+    info.net = String(info.net || "").toLowerCase(); info.sec = String(info.sec || "").toLowerCase();
+    return info;
+  }
+  function isLocalHost(h) {
+    h = String(h || "").toLowerCase();
+    if (!h) return true;
+    if (/^(localhost|127\.|0\.0\.0\.0|10\.|192\.168\.|172\.(1[6-9]|2\d|3[01])\.)/.test(h)) return true;
+    try {
+      if (h === location.hostname.toLowerCase()) return true;
+      if (state.ctx && h === new URL(state.ctx.panel).hostname.toLowerCase()) return true;
+    } catch (e) {}
+    return false;
+  }
+  /* ورودی‌های اطلاعاتی (حجم/زمان باقی‌مانده و...) سرور واقعی نیستند و پینگ نمی‌خورند */
+  function isInfoEntry(ep) { return !ep || !ep.host || !ep.port || ep.port < 20 || isLocalHost(ep.host); }
 
-        fetch(target, {
-          mode: "no-cors",
-          cache: "no-store",
-          credentials: "omit",
-          signal: ctrl ? ctrl.signal : undefined
-        }).then(function () {
-          if (done) return;
-          done = true; clearTimeout(timer);
-          resolve(Math.max(1, Math.round(performance.now() - t0)));
-        }).catch(function () {
-          if (done) return;
-          done = true; clearTimeout(timer);
-          var dt = Math.round(performance.now() - t0);
-          resolve(dt < 3100 ? Math.max(1, dt) : null);
-        });
+  /* ---------- Ping engine ---------- */
+  /* مرورگر ICMP ندارد؛ زمان برقراری ارتباط با host:port سنجیده می‌شود.
+     اگر سرور به HTTP جواب بدهد، نمونه‌های بعدی روی اتصال باز می‌روند و تقریباً RTT واقعی‌اند.
+     اگر فقط خطا برگردد (مثل Reality/TCP)، زمان ≈ ۲ رفت‌وبرگشت است و نصفش را «تخمینی» نشان می‌دهیم.
+     خطای فوری (زیر ۱۲ms) یعنی مرورگر یا شبکه قبل از رسیدن به سرور رد کرده، پس ناموفق حساب می‌شود. */
+  var pingRunning = false, lastPaint = 0, paintTimer = null, cfgSort = "ping";
+
+  function probeOnce(host, port, timeout) {
+    return new Promise(function (resolve) {
+      var t0 = performance.now(), done = false, ctrl = window.AbortController ? new AbortController() : null;
+      var timer = setTimeout(function () { if (done) return; done = true; if (ctrl) try { ctrl.abort(); } catch (e) {} resolve(null); }, timeout);
+      function fin(ok) { if (done) return; done = true; clearTimeout(timer); resolve({ ms: Math.round(performance.now() - t0), ok: ok }); }
+      try {
+        fetch("https://" + (host.indexOf(":") > -1 ? "[" + host + "]" : host) + ":" + port + "/?_p=" + Date.now(), { mode: "no-cors", cache: "no-store", credentials: "omit", signal: ctrl ? ctrl.signal : undefined })
+          .then(function () { fin(true); }, function () { fin(false); });
+      } catch (e) { fin(false); }
+    });
+  }
+  function measure(ep) {
+    var res = [];
+    function step(n) {
+      return probeOnce(ep.host, ep.port, 4000).then(function (r) {
+        if (r) res.push(r);
+        if (r && n > 1) return step(n - 1);
       });
     }
-
-    // اجرای دو مرحله‌ای برای دقت بالاتر
-    return singleProbe().then(function (first) {
-      if (first === null) return null;
-      return singleProbe().then(function (second) {
-        return second !== null ? Math.min(first, second) : first;
-      });
+    return step(3).then(function () {
+      var ok = res.filter(function (r) { return r.ok; });
+      if (ok.length) return { ms: Math.max(1, Math.min.apply(null, ok.map(function (r) { return r.ms; }))), exact: true };
+      var slow = res.filter(function (r) { return r.ms >= 12; });
+      if (!slow.length) return null;
+      return { ms: Math.max(1, Math.round(Math.min.apply(null, slow.map(function (r) { return r.ms; })) / 2)), exact: false };
     });
   }
 
-  function updatePingBadge(idx, status) {
-    var el = document.querySelector('[data-ping-idx="' + idx + '"]');
-    if (!el) return;
-    if (status === "testing") {
-      el.className = "ping-chip testing";
-      el.innerHTML = "<i></i><span>Testing...</span>";
-    } else if (status === null || status === "fail") {
-      el.className = "ping-chip fail";
-      el.innerHTML = "<i></i><span>Timeout</span>";
-    } else if (typeof status === "number") {
-      var cls = status < 220 ? "fast" : (status < 480 ? "med" : "slow");
-      el.className = "ping-chip " + cls;
-      el.innerHTML = "<i></i><span>" + status + " ms</span>";
-    }
+  function pingOf(idx) { var p = state.pings[idx]; return p && typeof p === "object" ? p.ms : Infinity; }
+  function chipState(idx) {
+    var p = state.pings[idx];
+    if (p === "testing") return { c: "testing", t: "Testing..." };
+    if (p === "fail") return { c: "fail", t: "Timeout" };
+    if (p && typeof p === "object") return { c: p.ms < 220 ? "fast" : (p.ms < 480 ? "med" : "slow"), t: (p.exact ? "" : "~") + p.ms + " ms" };
+    return { c: "", t: "تست پینگ" };
   }
-
-  function pingSingleConfig(idx) {
-    var raw = state.links[idx];
-    if (!raw) return Promise.resolve();
-    var ep = parseEndpoint(raw);
-    if (!ep) {
-      state.pings[idx] = "fail";
-      updatePingBadge(idx, "fail");
-      return Promise.resolve();
-    }
-    state.pings[idx] = "testing";
-    updatePingBadge(idx, "testing");
-    return measureEndpointPing(ep).then(function (ms) {
-      state.pings[idx] = ms === null ? "fail" : ms;
-      updatePingBadge(idx, state.pings[idx]);
+  function chipHtml(idx) {
+    var s = chipState(idx);
+    return '<button type="button" class="ping-chip ' + s.c + '" data-ping-idx="' + idx + '" title="تست پینگ این سرور"><i></i><span>' + s.t + "</span></button>";
+  }
+  function updatePingBadge(idx) {
+    var s = chipState(idx);
+    document.querySelectorAll('[data-ping-idx="' + idx + '"]').forEach(function (el) {
+      el.className = "ping-chip " + s.c; el.innerHTML = "<i></i><span>" + s.t + "</span>";
     });
   }
-
+  function schedulePaint(force) {
+    var now = Date.now();
+    if (force || now - lastPaint > 700) { clearTimeout(paintTimer); paintTimer = null; lastPaint = now; renderConfigs(); }
+    else if (!paintTimer) paintTimer = setTimeout(function () { paintTimer = null; lastPaint = Date.now(); renderConfigs(); }, 700);
+  }
+  function pingBusy(on) {
+    ["ping-all", "top-refresh"].forEach(function (id) { var b = $(id); if (b) b.classList.toggle("spin", !!on); });
+  }
+  function pingOne(idx) {
+    var raw = state.links[idx], ep = raw ? parseEndpoint(raw) : null;
+    if (!ep || isInfoEntry(ep)) { state.pings[idx] = "skip"; return Promise.resolve(); }
+    state.pings[idx] = "testing"; updatePingBadge(idx);
+    return measure(ep).then(function (r) { state.pings[idx] = r || "fail"; updatePingBadge(idx); });
+  }
   function pingAllConfigs() {
+    if (pingRunning) return;
     if (!state.links.length) { toast("کانفیگی برای تست وجود ندارد"); return; }
-    var btn = $("ping-all");
-    btn.classList.add("spin");
-    var promises = state.links.map(function (_, idx) { return pingSingleConfig(idx); });
-    Promise.all(promises).then(function () {
-      btn.classList.remove("spin");
-      toast("تست پینگ سرورها کامل شد");
+    var queue = [];
+    state.links.forEach(function (raw, i) {
+      var ep = parseEndpoint(raw);
+      if (!ep || isInfoEntry(ep)) state.pings[i] = "skip"; else { state.pings[i] = "testing"; queue.push(i); }
     });
+    if (!queue.length) { toast("سروری برای تست وجود ندارد"); return; }
+    pingRunning = true; pingBusy(true); schedulePaint(true);
+    var active = 0, LIMIT = 5;
+    function next() {
+      if (!queue.length) {
+        if (!active) { pingRunning = false; pingBusy(false); schedulePaint(true); toast("تست پینگ سرورها کامل شد"); }
+        return;
+      }
+      var i = queue.shift(); active++;
+      pingOne(i).then(function () { active--; schedulePaint(false); next(); });
+    }
+    for (var k = 0; k < LIMIT; k++) next();
   }
 
   function wgParam(params, name) {
@@ -1715,49 +1863,66 @@ html[data-theme="light"] .ping-chip.fast {
     setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
   }
 
-  function renderConfigs() {
-    var items = [];
-    if (state.ctx) items.push({ title: "لینک هوشمند اشتراک (Subscription)", sub: "SUB", payload: state.ctx.subUrl, main: true });
-    state.links.forEach(function (raw, i) {
-      var ep = parseEndpoint(raw);
-      items.push({
-        title: configName(raw) || (linkType(raw) + " " + num(i + 1)),
-        sub: linkType(raw),
-        host: ep ? (ep.host + ":" + ep.port) : "",
-        payload: raw,
-        idx: i
-      });
+  function tagsHtml(info) {
+    var t = '<span class="proto-tag">' + esc(info.proto) + "</span>";
+    if (info.net) t += '<span class="ctag">' + esc(info.net.toUpperCase()) + "</span>";
+    if (info.sec && info.sec !== "none") t += '<span class="ctag sec">' + esc(info.sec.toUpperCase()) + "</span>";
+    if (info.port) t += '<span class="ctag">:' + info.port + "</span>";
+    return t;
+  }
+  function configItems() {
+    return state.links.map(function (raw, i) {
+      var name = configName(raw), info = parseConfig(raw);
+      return { idx: i, payload: raw, info: info, title: cleanName(name) || (info.proto + " " + num(i + 1)), cc: flagFromName(name), special: isInfoEntry(info) };
     });
-    if (!items.length) { $("config-list").innerHTML = '<div class="empty">کانفیگی برای نمایش نیست</div>'; return; }
-    $("config-list").innerHTML = items.map(function (it) {
+  }
+  function byPing(a, b) { var pa = pingOf(a.idx), pb = pingOf(b.idx); return pa === pb ? a.idx - b.idx : pa - pb; }
+
+  function renderConfigs() {
+    var html = "", items = configItems(), real = items.filter(function (x) { return !x.special; });
+    var sorted = items.slice();
+    if (cfgSort === "ping") sorted.sort(function (a, b) {
+      if (a.special !== b.special) return a.special ? 1 : -1;
+      return byPing(a, b);
+    });
+    var bestIdx = -1, bestMs = Infinity;
+    real.forEach(function (x) { var m = pingOf(x.idx); if (m < bestMs) { bestMs = m; bestIdx = x.idx; } });
+
+    if (state.ctx) {
+      html += '<article class="cfg main" data-title="لینک اشتراک" data-payload="' + esc(state.ctx.subUrl) + '">' +
+        '<div class="cfg-head"><span class="cfg-flag">' + ICON.plug + '</span><div class="cfg-tx"><b>لینک هوشمند اشتراک (Subscription)</b>' +
+        '<div class="cfg-meta"><span class="proto-tag">SUB</span><span style="font-size:12px;color:var(--mute)">افزودن خودکار همه سرورها</span></div></div></div>' +
+        '<div class="cfg-act"><button class="pill-btn primary" type="button" data-action="copy">کپی</button><button class="pill-btn" type="button" data-action="qr">QR</button></div></article>';
+    }
+    sorted.forEach(function (it) {
       var dl = !!wireguardConfigText(it.payload);
-      var pingHtml = "";
-      if (!it.main) {
-        var pVal = state.pings[it.idx];
-        var pCls = "ping-chip", pTxt = "تست پینگ";
-        if (pVal === "testing") { pCls += " testing"; pTxt = "Testing..."; }
-        else if (pVal === "fail") { pCls += " fail"; pTxt = "Timeout"; }
-        else if (typeof pVal === "number") {
-          pCls += " " + (pVal < 220 ? "fast" : (pVal < 480 ? "med" : "slow"));
-          pTxt = pVal + " ms";
-        }
-        pingHtml = '<button type="button" class="' + pCls + '" data-ping-idx="' + it.idx + '" title="تست پینگ این سرور"><i></i><span>' + pTxt + '</span></button>';
-      }
-      return '<article class="cfg' + (it.main ? " main" : "") + '" data-title="' + esc(it.title) + '" data-payload="' + esc(it.payload) + '">' +
-        '<div class="cfg-tx">' +
-          '<b>' + esc(it.title) + '</b>' +
-          '<div class="cfg-meta">' +
-            '<span class="proto-tag">' + esc(it.sub) + '</span>' +
-            (it.host ? '<span class="host-txt">' + esc(it.host) + '</span>' : '<span style="font-size:12px;color:var(--mute)">افزودن خودکار همه سرورها</span>') +
-            pingHtml +
-          '</div>' +
-        '</div>' +
-        '<div class="cfg-act">' +
-          '<button class="pill-btn' + (it.main ? " primary" : "") + '" type="button" data-action="copy">کپی</button>' +
-          '<button class="pill-btn" type="button" data-action="qr">QR</button>' +
-          (dl ? '<button class="pill-btn" type="button" data-action="download">فایل</button>' : "") +
-        '</div></article>';
-    }).join("");
+      var meta = tagsHtml(it.info) + (it.special ? '<span class="ctag">اطلاعات</span>' : chipHtml(it.idx) + (it.idx === bestIdx ? '<span class="best-tag">★ بهترین</span>' : ""));
+      html += '<article class="cfg' + (it.idx === bestIdx ? " best" : "") + '" data-title="' + esc(it.title) + '" data-payload="' + esc(it.payload) + '">' +
+        '<div class="cfg-head"><span class="cfg-flag">' + flagHtml(it.cc) + '</span><div class="cfg-tx"><b>' + esc(it.title) + "</b>" +
+        (it.info.host ? '<small class="host-txt">' + esc(it.info.host) + "</small>" : "") + '<div class="cfg-meta">' + meta + "</div></div></div>" +
+        '<div class="cfg-act"><button class="pill-btn" type="button" data-action="copy">کپی</button><button class="pill-btn" type="button" data-action="qr">QR</button>' +
+        (dl ? '<button class="pill-btn" type="button" data-action="download">فایل</button>' : "") + "</div></article>";
+    });
+    $("config-list").innerHTML = html || '<div class="empty">کانفیگی برای نمایش نیست</div>';
+    renderTop(real);
+  }
+
+  function renderTop(real) {
+    var panel = $("top-panel"), box = $("top-list");
+    if (!panel) return;
+    panel.classList.toggle("hidden", !real.length);
+    if (!real.length) return;
+    var good = real.filter(function (x) { return isFinite(pingOf(x.idx)); }).sort(byPing).slice(0, 10);
+    var testing = real.some(function (x) { return state.pings[x.idx] === "testing"; });
+    box.innerHTML = good.length ? good.map(function (it, i) {
+      var sub = it.info.proto + (it.info.net ? " · " + it.info.net.toUpperCase() : "") + (it.info.sec && it.info.sec !== "none" ? " · " + it.info.sec.toUpperCase() : "");
+      return '<div class="top-row" data-title="' + esc(it.title) + '" data-payload="' + esc(it.payload) + '">' +
+        '<span class="rk">' + num(i + 1) + '</span><span class="cfg-flag">' + flagHtml(it.cc) + '</span>' +
+        '<span class="cfg-tx"><b>' + esc(it.title) + '</b><small class="host-txt">' + esc(sub) + "</small></span>" + chipHtml(it.idx) +
+        '<button class="round sm" type="button" data-action="copy" aria-label="کپی">' + ICON.copy + "</button></div>";
+    }).join("") : '<div class="empty">' + (testing ? "در حال تست پینگ…" : "برای دیدن بهترین سرورها، تست پینگ را بزنید") + "</div>";
+    var done = real.filter(function (x) { var p = state.pings[x.idx]; return p === "fail" || (p && typeof p === "object"); }).length;
+    $("top-foot-text").textContent = done ? num(done) + "/" + num(real.length) + " تست‌شده" : "";
   }
 
   /* ---------------- Apps view ---------------- */
@@ -1862,11 +2027,25 @@ html[data-theme="light"] .ping-chip.fast {
     document.addEventListener("keydown", function (e) { if (e.key === "Escape") { closeModal("login-modal"); closeModal("qr-modal"); } });
 
     $("ping-all").addEventListener("click", pingAllConfigs);
+    $("top-refresh").addEventListener("click", pingAllConfigs);
+    $("top-more").addEventListener("click", function () { setView("configs"); });
+    $("cfg-sort").addEventListener("click", function (e) {
+      var b = e.target.closest("[data-sort]"); if (!b) return;
+      cfgSort = b.getAttribute("data-sort");
+      document.querySelectorAll("#cfg-sort button").forEach(function (x) { x.classList.toggle("on", x === b); });
+      renderConfigs();
+    });
+    $("top-list").addEventListener("click", function (e) {
+      var chip = e.target.closest("[data-ping-idx]");
+      if (chip) { pingOne(Number(chip.getAttribute("data-ping-idx"))).then(function () { schedulePaint(true); }); return; }
+      var row = e.target.closest(".top-row"); if (!row) return;
+      copyText(row.getAttribute("data-payload") || "", e.target.closest("[data-action]") || row);
+    });
     $("copy-all").addEventListener("click", function () { copyText(state.links.join("\n") || (state.ctx && state.ctx.subUrl) || "", $("copy-all")); });
     $("config-list").addEventListener("click", function (e) {
       var pingBtn = e.target.closest("[data-ping-idx]");
       if (pingBtn) {
-        pingSingleConfig(Number(pingBtn.getAttribute("data-ping-idx")));
+        pingOne(Number(pingBtn.getAttribute("data-ping-idx"))).then(function () { schedulePaint(true); });
         return;
       }
       var btn = e.target.closest("[data-action]"); if (!btn) return;
@@ -1898,7 +2077,7 @@ html[data-theme="light"] .ping-chip.fast {
     document.querySelectorAll("#style button").forEach(function (b) {
       b.addEventListener("click", function () {
         state.style = b.getAttribute("data-style");
-        try { localStorage.setItem(LS.chart); } catch (e) {}
+        try { localStorage.setItem(LS.chart, state.style); } catch (e) {}
         renderUsage();
       });
     });
@@ -1944,6 +2123,7 @@ html[data-theme="light"] .ping-chip.fast {
     $("support-btn").innerHTML = ICON.help;
     $("login-btn").innerHTML = ICON.key;
     $("usage-refresh").innerHTML = ICON.refresh;
+    $("top-refresh").innerHTML = ICON.bolt;
     $("ping-all").innerHTML = ICON.bolt + "<span>تست پینگ همه</span>";
     $("copy-all").innerHTML = ICON.copy + "<span>کپی همه</span>";
     $("login-close").innerHTML = ICON.close;
